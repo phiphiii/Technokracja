@@ -1,0 +1,18 @@
+#p1 {
+    width: 100px;
+    height: 100px;
+    background: red;
+    font-size: 85px;
+    text-align: center;
+    margin: 0px;
+    
+    animation-duration: 5s;
+    animation: myColorAnimation;
+    animation-iteration-count: infinite;
+}
+
+@keyframes myColorAnimation{
+    from{background-color:red;}
+    to{background-color:blue;}
+}
+https://www.youtube.com/watch?v=cyuzt1Dp8X8
