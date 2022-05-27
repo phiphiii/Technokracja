@@ -45,7 +45,7 @@
                 $sql = "SELECT usernameUsers FROM users WHERE usernameUsers=?";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt, $sql)){
-                    header("Location: ../rejestracja.php?error=sqlerror");
+                    header("Location: ../rejestracja.php?error=sqlerror1");
                     exit();
 
                 }
@@ -59,10 +59,10 @@
                         exit();
                      }
                      else{
-                        $sql = "INSERT INTO users (usernameUsers, emailUsers, passwordUsers) VALUES (?, ?, ?)";
+                        $sql = "INSERT INTO users(usernameUsers, emailUsers, passwordUsers) VALUES (?, ?, ?)";
                         $stmt = mysqli_stmt_init($conn);
                         if(!mysqli_stmt_prepare($stmt, $sql)){
-                            header("Location: ../rejestracja.php?error=sqlerror");
+                            header("Location: ../rejestracja.php?error=sqlerror2");
                             exit();
         
                         }
