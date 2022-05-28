@@ -32,6 +32,28 @@
                 <button name="submitSignup" type="submit" class="submit-jd">Zaloguj się</button>
             </form>
         </section>
+        <?php
+            if(isset($_GET["error"])){
+                if($_GET["error"] == "emptyfields"){
+                    echo "<p>Wypełnij wszystkie pola!</p>";
+                }
+                else if($_GET["error"] == "invaliduser"){
+                    echo "<p>Wybierz poprawną nazwę użytkownika</p>";
+                }
+                else if($_GET["error"] == "invalidemail"){
+                    echo "<p>Taki email nie może istnieć</p>";
+                }
+                else if($_GET["error"] == "invalidmailuser"){
+                    echo "<p>Email oraz nazwa użytkownika zostały źle wpisane</p>";
+                }
+                else if($_GET["error"] == "invalidpasswordcheck"){
+                    echo "<p>Podane hasła ze sobą nie pasują</p>";
+                }
+                else if($_GET["error"] == "sqlerror"){
+                    echo "<p>Coś poszło nie tak, spróbuj ponownie</p>";
+                }
+            }
+        ?>
 
     </body>
 </html>
