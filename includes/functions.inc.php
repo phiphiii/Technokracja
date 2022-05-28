@@ -81,4 +81,36 @@
         header("Location: ../rejestracja.php?error=none");
         exit();
     }
+    function emptyInputLogin($email, $pswrd){
+        $result;
+        if(empty($email) || empty($pswrd)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+    function loginUser($conn, $email, $pswrd){
+        $userExists = userExists($conn, $email, $email);
+        if($userExists === false){
+            header("location: ../logowanie.php?error=wronglogin");
+            exit();
+        }
+
+        $pswrdHashed = $userExists["passwordUsers"];
+        $checkPswrd = password_verify($pswrd,$pswrdHashed);
+
+        if($checkPswrd === false){
+            header("location: ../logowanie.php?error=wrongpassword");
+            exit();
+        }
+        else if($checkPswrd === true){
+            session_start();
+            $_SESSION["userid"] = $userExists["idUsers"];
+            $_SESSION["userid"] = $userExists["idUsers"];
+            header("location: ../main.php");
+            exit();
+        }
+    }
 ?>

@@ -43,14 +43,11 @@
                 else if($_GET["error"] == "invalidemail"){
                     echo "<p>Taki email nie może istnieć</p>";
                 }
-                else if($_GET["error"] == "invalidmailuser"){
-                    echo "<p>Email oraz nazwa użytkownika zostały źle wpisane</p>";
-                }
                 else if($_GET["error"] == "invalidpasswordcheck"){
                     echo "<p>Podane hasła ze sobą nie pasują</p>";
                 }
-                else if($_GET["error"] == "sqlerror"){
-                    echo "<p>Coś poszło nie tak, spróbuj ponownie</p>";
+                else if($_GET["error"] == "usertaken"){
+                    echo "<p>Email lub nazwa użytkownika już jest zajęta</p>";
                 }
             }
         ?>
