@@ -5,6 +5,8 @@
 }
 body{
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 *{
@@ -221,3 +223,155 @@ textarea{
 		height: 200px;
 	}
 }
+
+p{
+    margin:0;
+    padding: 0px 50px;
+    font-size: 18px;
+    text-align: justify;
+
+}
+
+.inner-footer{
+    margin:0;
+    padding: 0;
+    background-color: #272727;
+}
+
+.social-links{
+    display: flex;
+    text-align:center;
+    
+
+}
+
+.social-links ul{
+list-style: none;
+width: 50px;
+height: 30px;
+margin:auto;
+padding: 10px;
+}
+
+.social-items a{
+    padding: 10px 0px;
+    font-size: 35px;
+    color: #6cccc6;
+    transition: all .25s;
+    list-style:none;
+    display: flex;
+    align-items: center;
+
+}
+
+.social-items a:hover{
+    color: #54a39e;
+}
+
+.quick-links{
+    display: flex;
+    width: 50px;
+    height: 30px;
+    margin: auto;
+}
+
+.quick-items{
+    list-style: none;
+}
+
+.quick-items a{
+    text-decoration: none;
+    padding: 0px 15px;
+    font-size: 20px;
+    color: white;
+    transition: all .25s;
+}
+
+.quick-items a:hover{
+    color: #8c38ff;
+}
+.outer-footer{
+    padding: 10px;
+    text-align: center;
+    color:white;
+    font-size: 18px;
+    background-color: #3f3f3f;
+}
+
+.about{
+    width: 100%;
+    height: 100vh;
+    background-color: #161922;
+    display: flex;
+    justify-content: center;
+}
+
+.text-ab{
+    width: 550px;
+    max-width: 100%;
+    padding: 10;
+}
+.text-ab h1{
+    color: #8c38ff;
+    font-size: 85px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.text-ab h5{
+    color: white;
+    font-size: 25px;;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+}
+.text-ab p{
+    color: #c0c4d6;
+    font-size: 19px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 45px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+button{
+    background-color: #8c38ff;
+    color: black;
+    border: 2px solid transparent;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+}
+button:hover{
+    transform: scale(1.2);
+    background-color: transparent;
+    border: 2px solid #8c38ff;
+    color: #8c38ff;
+    transition: .4s;
+    cursor: pointer;
+}
+
+/*
+button{
+    background-color: #ffcc74;
+    color: black;
+    border: 2px solid transparent;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+button:hover{
+    transform: scale(1.2);
+    background-color: transparent;
+    border: 2px solid #ffcc74;
+    color: #ffcc74;
+    transition: .4s;
+    cursor: pointer;
+}
+
+*/
