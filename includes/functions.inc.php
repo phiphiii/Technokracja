@@ -45,10 +45,10 @@
         return $result;
     }
     function userExists($conn, $user, $email){
-        $sql = "SELECT * FROM users WHERE idUsers = ? OR emailUsers = ?;";
+        $sql = "SELECT * FROM users WHERE usernameUsers = ? OR emailUsers = ?;";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ../rejestracja.php?error=stmtfailed");
+            header("Location: ../register.php?error=stmtfailed");
             exit();
         }
         mysqli_stmt_bind_param($stmt,"ss",$user,$email);
@@ -69,7 +69,7 @@
         $sql = "INSERT INTO users(usernameUsers, emailUsers, passwordUsers) VALUES (?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
-            header("Location: ../rejestracja.php?error=stmtfailed");
+            header("Location: ../register.php?error=stmtfailed");
             exit();
         }
 
@@ -78,7 +78,7 @@
         mysqli_stmt_bind_param($stmt,"sss",$user,$email,$hashedPswrd);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: ../rejestracja.php?error=none");
+        header("Location: ../register.php?error=none");
         exit();
     }
     function emptyInputLogin($email, $pswrd){
@@ -91,10 +91,10 @@
         }
         return $result;
     }
-    function loginUser($conn, $email, $pswrd){
-        $userExists = userExists($conn, $email, $email);
+    function loginUser($conn, $user, $pswrd){
+        $userExists = userExists($conn, $user, $user);
         if($userExists === false){
-            header("location: ../logowanie.php?error=wronglogin");
+            header("location: ../login.php?error=wronglogin");
             exit();
         }
 
@@ -102,14 +102,14 @@
         $checkPswrd = password_verify($pswrd,$pswrdHashed);
 
         if($checkPswrd === false){
-            header("location: ../logowanie.php?error=wrongpassword");
+            header("location: ../login.php?error=wrongpassword");
             exit();
         }
         else if($checkPswrd === true){
             session_start();
             $_SESSION["userid"] = $userExists["idUsers"];
             $_SESSION["userid"] = $userExists["idUsers"];
-            header("location: ../main.php");
+            header("location: ../index.html");
             exit();
         }
     }
