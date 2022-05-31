@@ -58,7 +58,7 @@
         ?>
             <div class="signup_link">
               Jesteś już zarejestrowany? <a href="login.php">Zaloguj się</a>
-              <a href="index.html"> Powrót na strone główną</a>
+              <a href="index.php"> Powrót na strone główną</a>
             </div>
           </form>
         </div>

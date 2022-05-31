@@ -41,7 +41,7 @@
             ?>
             <div class="signup_link">
               Nie masz konta? <a href="register.php">Zarejestuj się</a><br>
-              <a href="index.html"> Powrót na strone główną</a>
+              <a href="index.php"> Powrót na strone główną</a>
             </div>
             
           </form>

@@ -108,8 +108,8 @@
         else if($checkPswrd === true){
             session_start();
             $_SESSION["userid"] = $userExists["idUsers"];
-            $_SESSION["userid"] = $userExists["idUsers"];
-            header("location: ../index.html");
+            $_SESSION["username"] = $userExists["usernameUsers"];
+            header("location: ../index.php");
             exit();
         }
     }
