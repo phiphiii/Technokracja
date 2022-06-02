@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width", initial-scale="1.0"> 
 <title>TechnoNews</title>
 <link rel="stylesheet" href="main.css"/>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
@@ -38,7 +40,7 @@
 </nav>
 <script src="main.js"></script>
 
-<br><br><br><br>
+<br><br>
 <section class="about">
     <div class="text-ab">
       <br>
@@ -49,7 +51,28 @@
     </div>
 </section>
 
+<footer class="footer">
+    <div class="inner-footer">
+        <div class="social-links">
+         
+                <li class="social-items"><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                <li class="social-items"><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                <li class="social-items"><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                <li class="social-items"><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+           
+        </div>
+        <div class="quick-links">
+            <ul>
 
+                <li class="quick-items"><a href="#">Regulamin</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="outer-footer">
+        Copyright &copy; TechnoNews Corp. All Rights Reserved.
+    </div>
+</footer>
 </body>
 
 </html>

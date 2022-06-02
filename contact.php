@@ -41,12 +41,35 @@
 		<div class="contact-box">
 			<div class="left"></div>
 			<div class="right">
-				<h2>Contact Us</h2>
-				<input type="text" class="field" placeholder="Your Name">
-				<input type="text" class="field" placeholder="Your Email">
-				<input type="text" class="field" placeholder="Phone">
-				<textarea placeholder="Message" class="field"></textarea>
-				<button class="btn">Send</button>
+                
+				<h2>Napisz do nas</h2>
+                <form action="includes/contact.inc.php" method="post">
+                    
+                    <?php
+                        if(isset($_SESSION["username"])){
+                            if(!is_null($_SESSION["name"])){
+                                echo '<input name="name" type="text" class="field" placeholder="Imię" value="'.$_SESSION["name"];
+                                if(!is_null($_SESSION["surname"])){
+                                    echo ' '.$_SESSION["surname"];
+                                }
+                                echo '">';
+                            }
+                            else{
+                                echo '<input name="name" type="text" class="field" placeholder="Imię">';
+                            }
+                            echo '<input name="email" type="text" class="field" placeholder="Email" value="'.$_SESSION["email"].'">';
+                        }
+                        else{
+                            echo '<input name="name" type="text" class="field" placeholder="Imię">';
+                            echo '<input name="email" type="text" class="field" placeholder="Email">';
+                            
+                        }
+
+                    ?>
+                    <input name="phone" type="text" class="field" placeholder="Telefon">
+                    <textarea name="msg" placeholder="Wiadomość" class="field"></textarea>
+                    <button name="submitContact" type="submit" class="btn">Wyślij</button>
+                </form>
 			</div>
 		</div>
 </section>

@@ -16,7 +16,7 @@
             header("Location ../register.php?error=invaliduser&email=".$email);
             exit();
         }
-        if(invalidEmail($email) !== false){
+        if(invalidEmail2($email) !== false){
             header("Location ../register.php?error=invalidemail&user=".$user);
             exit();
         }

@@ -26,9 +26,30 @@
     function invalidEmail($email){
         //To nie chce działać ale kurde bela naprawie przysięgam
         $result;
-        if(empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
             $result = true;
         }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+    function invalidEmail2($email){
+        //To nie chce działać ale kurde bela naprawie przysięgam
+        $result;
+        if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+    function invalidPhone($phone){
+        $result;
+        if(!preg_match("/^[0-9]{9}$/", $phone)) {
+            $result = true;
+          }
         else{
             $result = false;
         }
@@ -45,7 +66,7 @@
         return $result;
     }
     function userExists($conn, $user, $email){
-        $sql = "SELECT * FROM users WHERE usernameUsers = ? OR emailUsers = ?;";
+        $sql = "SELECT * FROM users WHERE usernameUsers = ? OR emailUsers = ? ";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
             header("Location: ../register.php?error=stmtfailed");
@@ -75,7 +96,7 @@
 
         $hashedPswrd = password_hash($pswrd, PASSWORD_DEFAULT);
 
-        mysqli_stmt_bind_param($stmt,"sss",$user,$email,$hashedPswrd);
+        //mysqli_stmt_bind_param($stmt,"sss",$user,$email,$hashedPswrd);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         header("Location: ../register.php?error=none");
@@ -109,8 +130,61 @@
             session_start();
             $_SESSION["userid"] = $userExists["idUsers"];
             $_SESSION["username"] = $userExists["usernameUsers"];
+            $_SESSION["email"] = $userExists["emailUsers"];
+            $_SESSION["name"] = $userExists["nameUsers"];
+            $_SESSION["surname"] = $userExists["surnameUsers"];
             header("location: ../index.php");
             exit();
         }
     }
+    function emptyInputContact($name,$email,$phone,$msg){
+        $result;
+        if(empty($name) || empty($email) || empty($phone) || empty($msg)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+    function sendMsg($conn, $name, $email, $phone, $msg){
+        $userExists = userExists($conn, $email, $email);
+        $stmt = mysqli_stmt_init($conn);
+        if($userExists === false){
+            $sql = "INSERT INTO messages(nameMessages, emailMessages, phoneMessages, msgMessages) VALUES (?, ?, ?, ?);";
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                header("Location: ../contact.php?error=stmtfailed");
+                exit();
+            }
+            mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$phone,$msg);
+        }
+        else{
+            $iduser = $userExists["idUsers"];
+            $sql = "INSERT INTO messages(idUMessages, nameMessages, emailMessages, phoneMessages, msgMessages) VALUES (?, ?, ?, ?, ?);";
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                header("Location: ../contact.php?error=stmtfailed");
+                exit();
+            }
+            mysqli_stmt_bind_param($stmt,"sssss",$iduser,$name,$email,$phone,$msg);
+        }
+        
+        
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("Location: ../contact.php?error=none");
+        exit();
+        
+    }
+    function updateName($conn, $name, $surname){
+        $userExists = userExists($conn, $email, $email);
+        $stmt = mysqli_stmt_init($conn);
+        if($userExists === true){
+
+        }
+        else{
+            header("Location: ../profile.php?error=somethingfailed");
+                exit();
+        }
+    }
+    
 ?>

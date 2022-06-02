@@ -23,7 +23,7 @@
               <span></span>
               <label>Hasło</label>
             </div>
-            <div class="pass">Zapomniałeś hasła?</div>
+            <div class="pass"><a href="forgotpas.php">Zapomniałeś hasła?</a></div>
             <input name="submitLogin" type="submit" value="Login">
             <?php
             if(isset($_GET["error"])){
