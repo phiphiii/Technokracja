@@ -175,15 +175,84 @@
         exit();
         
     }
-    function updateName($conn, $name, $surname){
-        $userExists = userExists($conn, $email, $email);
+    function updateName($conn,$name, $surname){
+        $user = $_SESSION["username"];
+        $userExists = userExists($conn, $user, $user);
+        
         $stmt = mysqli_stmt_init($conn);
-        if($userExists === true){
-
+        if($userExists === false){
+            header("Location: ../profile.php?error=somethingfailed");
+            exit();
         }
         else{
-            header("Location: ../profile.php?error=somethingfailed");
+            $iduser = $userExists["idUsers"];
+            if(empty($name) && empty($surname)){
+                header("Location: ../profile.php?error=emptyfields");
                 exit();
+            }
+            if(!empty($name)){
+                if(!empty($surname)){
+                    $sql = "UPDATE users SET nameUsers = ?, surnameUsers = ? WHERE idUsers = ?";
+                    if(!mysqli_stmt_prepare($stmt,$sql)){
+                        header("Location: ../profile.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_bind_param($stmt,"sss",$name,$surname,$iduser);
+                }
+                else{
+                    $sql = "UPDATE users SET nameUsers = ? WHERE idUsers = ?";
+                    if(!mysqli_stmt_prepare($stmt,$sql)){
+                        header("Location: ../profile.php?error=stmtfailed");
+                        exit();
+                    }
+                    mysqli_stmt_bind_param($stmt,"ss",$name,$iduser);
+                }
+            }
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            header("Location: ../profile.php?error=none");
+            exit();
+            
+        }
+    }
+    function changePassword($conn,$oldpswrd, $newpswrd, $newpswrd2){
+        $user = $_SESSION["username"];
+        $userExists = userExists($conn, $user, $user);
+        
+        $stmt = mysqli_stmt_init($conn);
+        if($userExists === false){
+            header("Location: ../profile.php?error=somethingfailed");
+            exit();
+        }
+        else{
+            $iduser = $userExists["idUsers"];
+            if(empty($oldpswrd) || empty($newpswrd) || empty($newpswrd2)){
+                header("Location: ../profile.php?error=emptyfields");
+                exit();
+            }
+            if(pswrdMatch($newpswrd,$newpswrd2)){
+                header("Location: ../profile.php?error=passwordsnotmatching");
+                exit();
+            }
+                $pswrdHashed = $userExists["passwordUsers"];
+                $checkPswrd = password_verify($oldpswrd,$pswrdHashed);
+                if($checkPswrd === false){
+                    header("Location: ../profile.php?error=wrongpassword");
+                    exit();
+                }
+                $hashedPswrd = password_hash($newpswrd, PASSWORD_DEFAULT);
+                $sql = "UPDATE users SET passwordUsers = ? WHERE idUsers = ?";
+                if(!mysqli_stmt_prepare($stmt,$sql)){
+                    header("Location: ../profile.php?error=stmtfailed");
+                    exit();
+                }
+                mysqli_stmt_bind_param($stmt,"ss",$hashedPswrd,$iduser);
+            
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            header("Location: ../profile.php?error=none");
+            exit();
+            
         }
     }
     

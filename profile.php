@@ -50,7 +50,7 @@
 				<h2>Dane osobowe</h2>
                 <form action="includes/profile.inc.php" method="post">
                     <?php
-                        echo '<input type="text" class="field" disabled value="'.$_SESSION["username"].'">';
+                        echo '<input name="username" type="text" class="field" disabled value="'.$_SESSION["username"].'">';
                         echo '<input name="email" type="text" class="field" placeholder="Email" disabled value="'.$_SESSION["email"].'">';
                         if(!is_null($_SESSION["name"])){
                             echo '<input name="name" type="text" class="field" placeholder="Imię" value="'.$_SESSION["name"].'">';
@@ -66,14 +66,21 @@
                         }
                         
                     ?>
-                    <button class="btn">Zmień dane</button><br><br>
+                    <button name="submitUpdate" class="btn">Zmień dane</button><br><br>
+                    <?php
+                        if(isset($_GET["error"])){
+                            if($_GET["error"] == "none"){
+                                echo "<p>By zobaczyć zmiany należy się wylogować i zalogować ponownie</p>";
+                            }
+                        }
+                    ?>
                 </form>
                 <h2>Zmiana hasła</h2>
-                <form >
-                    <input type="password" class="field" placeholder="Stare haslo">
-                    <input type="password" class="field" placeholder="Nowe haslo">
-                    <input type="password" class="field" placeholder="Powtorz nowe haslo">
-                    <button class="btn">Zmień hasło</button>
+                <form action="includes/profile2.inc.php" method="post">
+                    <input name="oldpswrd" type="password" class="field" placeholder="Stare haslo">
+                    <input name="newpswrd" type="password" class="field" placeholder="Nowe haslo">
+                    <input name="newpswrd2" type="password" class="field" placeholder="Powtorz nowe haslo">
+                    <button name="submitPassword" class="btn">Zmień hasło</button>
                 </form>
                 <br>
                 <a href="includes/logout.inc.php"><button class="btn">Wyloguj się</button></a>

@@ -1,19 +1,18 @@
 <?php
-    if(isset($_POST["submit"])){
-        $user = $_POST["username"];
-        $psrwd = $_POST["password"];
+    session_start();
+    if(isset($_POST["submitUpdate"])){
+        $user = $_SESSION["username"];
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
 
         require_once "dbcon.inc.php";
         require_once "functions.inc.php";
 
-        if(emptyInputLogin($user,$psrwd)!==false ){
-            header("Location: ../login.php?error=emptyfields");
-            exit();
-        }
-        loginUser($conn, $user, $psrwd);
+        updateName($conn, $name, $surname);
     }
     else{
-        header("location: ../login.php");
+        header("location: ../profile.php");
         exit();
     }
+    
 ?>
